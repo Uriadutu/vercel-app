@@ -4,21 +4,14 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 import numpy as np
 from PIL import Image
-from flask_cors import CORS  # Import CORS
-
-# Inisialisasi Flask app
+from flask_cors import CORS 
 app = Flask(__name__)
 
-# Enable CORS untuk semua domain
 CORS(app)
-
-# Path untuk model yang telah disimpan
 model_path = 'cnn_model.h5'
 
 # Memuat model
 model = load_model(model_path)
-
-# Fungsi untuk memproses gambar
 def preprocess_image(image):
     img = load_img(image, target_size=(50, 50))  # Ubah ukuran gambar sesuai model
     img_array = img_to_array(img) / 255.0  # Normalisasi gambar
