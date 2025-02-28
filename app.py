@@ -10,14 +10,12 @@ app = Flask(__name__)
 CORS(app)
 model_path = 'cnn_model.h5'
 
-# Memuat model
 model = load_model(model_path)
 def preprocess_image(image):
     img = load_img(image, target_size=(50, 50))  # Ubah ukuran gambar sesuai model
     img_array = img_to_array(img) / 255.0  # Normalisasi gambar
     return np.expand_dims(img_array, axis=0)
 
-# Endpoint untuk menerima upload gambar
 @app.route('/predict-image', methods=['POST'])
 def predict_image():
     if 'image' not in request.files:
